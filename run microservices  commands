@@ -1,0 +1,33 @@
+source mircoservice/bin/activate
+python -m grpc_tools.protoc -I ../protobufs --python_out=. --grpc_python_out=. ../protobufs/productshow.proto (2-Чтобы сгенерировать код Python из protobufs делать лишь раз)
+python -m pip install -r requirements.txt(установка библиотек)
+(запуск без docker)
+------------------------------------------------------------------------------------------------
+
+(запуск в отдельной командной строке)
+source mircoservice/bin/activate
+cd pleer_scraper
+python pleer_scraper.py
+
+(запуск в отдельной командной строке)
+source mircoservice/bin/activate
+cd ya_scraper
+python ya_scraper.py
+
+(запуск в отдельной командной строке)
+source mircoservice/bin/activate
+cd server
+FLASK_APP=server.py flask run
+------------------------------------------------------------------------------------------------
+(запуск с docker)
+добавить MarkupSafe==2.0.1 в requirements.txt в папку marketplace
+sudo docker build . -f recommendations/Dockerfile -t recommendations
+sudo docker build . -f marketplace/Dockerfile -t marketplace
+sudo docker network create microservices 
+
+-------------------------------------------------------------------------------------------------
+сначала запускаем sudo docker run -p 127.0.0.1:50051:50051/tcp --network microservices \
+             --name recommendations recommendations
+потом sudo docker run -p 127.0.0.1:5000:5000/tcp --network microservices \
+             -e RECOMMENDATIONS_HOST=recommendations marketplace (в другом терминале)
+             
