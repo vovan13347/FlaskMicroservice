@@ -1,0 +1,54 @@
+<doctype html>
+  <head>
+    <style>
+    .myform {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 400px;
+      
+      
+    }
+
+    .mybutton {
+      margin: 0;
+      position: absolute;
+      bottom: 572px;
+      right: 710px;
+        
+    }
+
+    
+
+    h2 {
+    text-align: center;
+    
+    }
+
+    </style>
+      <title>Поиск товаров</title>
+  </head>
+  
+  <h2>Поиск товаров</h2>
+  
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <ul class=flashes>
+      {% for message in messages %}
+        <li>{{ message }}</li>
+      {% endfor %}
+      </ul>
+    {% endif %}
+  {% endwith %}
+  
+  {% from "_formhelpers.html" import render_field %}
+  <form method=post>
+    <div class = "myform">
+      <dl class="myinput">
+        {{ render_field(form.search) }}
+      </dl>
+    </div>
+    <div class = "mybutton">
+      <p><input type=submit value=Search>
+    </div>
+  </form>

@@ -1,0 +1,375 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <style>
+    img {
+
+      width: 200px;
+      height: 200px;
+    }
+
+    .myimage {
+      height: 200px;
+      float: left;
+    }
+
+    .myproduct {
+
+      height: 200px;
+    }
+  </style>
+  <title>Онлайн поиск товаров</title>
+</head>
+
+<body>
+
+<div class="container">
+    <div class="row">
+      <div class=" col-12 col-md-2">
+        <div class="card px-2">
+          <h2 class="text-center">Фильтрация</h2>
+          <hr>
+          <h4>Цена:</h4>
+          <div class="card-body">
+            <form id="price-range-form">
+              <label for="min-price" class="form-label">Минимальная цена: </label>
+              <span id="min-price-txt">0₽</span>
+              <input type="number" class="form-number" min="0" max="900000" id="min-price" step="10" value="0">
+              <label for="max-price" class="form-label">Максимальная цена: </label>
+              <span id="max-price-txt">900000₽</span>
+              <input type="number" class="form-number" min="0" max="900000" id="max-price" step="10000" value="900000">
+            </form>
+            <br>
+            <br>
+            <h4>Рейтинг</h4>
+            <div>
+              <form id="price-rating-form">
+                <label for="min-rating" class="form-label-2">Минимальный рейтинг: </label>
+                <span id="min-rating-txt">0</span>
+                <input type="range" class="form-number-2" min="0" max="5" id="min-rating"       step="1" value="0">
+                <label for="max-rating" class="form-label-2">Максимальный рейтинг: </label>
+                <span id="max-rating-txt">5</span>
+                <input type="range" class="form-number-2" min="0" max="5" id="max-rating" step="1" value="5">
+              </form>
+            </div>
+
+            <div class="tab-content">
+              <div id="filters">
+              
+                <a class="sortByPrice" href="#">Sort by Price</a>  
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <h1>Список товаров</h1>
+      <div class="col-12 col-md-10">
+        <div class="card">
+          <div class="card-body">
+            <div class="row" id="display-items-div">
+  
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+  </div>
+   <!--
+  <h1>Список товаров</h1>
+      
+    {% for x in n %}
+        {% for i in range(0,l) %}
+        <div class="mylist">
+            <div class="myimage"> 
+                <img src={{ x.image_link[i] }} > 
+            </div>
+
+            <div class="myproduct">
+                <dl>
+                    <dt><b>{{ x.product_name[i]}}</b></dt>
+                    <br>
+                    <dd>-   {{ x.product_name[i]}}</dd>
+                    <dd>-   {{ x.price[i]}}</dd>
+                    <dd>-   {{ x.rating[i]}}</dd>
+                </dl>
+            </div>
+        </div>
+        {% endfor %}
+    {% endfor %}
+    -->
+  <script>
+    function delSymbols(price)
+    { 
+      price = price.replaceAll('руб','');
+      price = price.replaceAll('\n','');
+      price = price.replaceAll(' ','');
+      return price;
+    }
+
+    function delSymbols2(rating)
+    { 
+      
+      return rating.replace('оценка = ','');
+    }
+
+    var products_array = [];
+    class Product {
+      constructor(name, price, rating, link, url_link) {
+        this.name = name;
+        this.price = price;
+        this.rating = rating;
+        this.link = link;
+        this.url_link = url_link;
+      }
+    }
+  </script>
+  {% for x in n %}
+  {% for i in range(0,l) %}
+  <script>
+    myProduct = new Product(
+      '{{ x.product_name[i] }}',
+      delSymbols('{{ x.price[i] }}'),
+      delSymbols2('{{ x.rating[i] }}'),
+      '{{ x.image_link[i] }}',
+      '{{ x.shop_link[i]  }}'
+      
+    )
+
+    
+    products_array.push(myProduct)
+
+function myFunction(array) {
+  
+  var q = 0;
+  for (let j = 0; j < array.length-1; j++) {
+    
+  for (let k = j+1; k < array.length; k++) 
+    {
+      if (parseInt(array[j].price) >= parseInt(array[k].price))
+      {
+          q = parseInt(array[j].price);
+          parseInt(array[j].price) = parseInt(array[k].price);
+          parseInt(array[k].price) = q;
+      }
+
+
+    }
+
+  }
+  return array;
+ }
+
+ myFunction(products_array);
+ for (let i = 0; i <  products_array.length; i++) {
+      console.log(products_array[i].price);
+    }
+    
+
+  </script>
+  {% endfor %}
+  {% endfor %}
+  <!--
+    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    -->
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+  <script>
+    
+    /*
+    for (i = 0; i < products_array.length; i++)
+      document.write(" \
+            <div class=\"mylist\"> \
+                <div class=\"myimage\"> \
+                    <img src=" + products_array[i].link + " > \
+                </div> \
+                <div class=\"myproduct\"> \
+                    <dl> \
+                        <dt><b>" + products_array[i].name + "</b></dt> \
+                        <br> \
+                        <dd>-   " + products_array[i].name + "</dd> \
+                    <dd>-   " + products_array[i].price + "</dd> \
+                    <dd>-   " + products_array[i].rating + "</dd> \
+                    </dl> \
+                </div> \
+            </div> \
+        ");
+    */
+  </script>
+
+<script>
+
+let min_price = 0;
+let max_price = 900000;
+
+let min_rating = 0;
+let max_rating = 5;
+
+
+$(document).ready(function () {
+  ShowAllProductsList(); //Display all items with no filter applied
+});
+
+$("#min-price").on("change mousemove", function () {
+  min_price = parseInt($("#min-price").val());
+  $("#min-price-txt").text(min_price + "₽" );
+  ShowProductsListFiltered();
+});
+
+$("#max-price").on("change mousemove", function () {
+  max_price = parseInt($("#max-price").val());
+  $("#max-price-txt").text(max_price + "₽");
+  ShowProductsListFiltered();
+});
+
+$("#min-rating").on("change mousemove", function () {
+  min_rating = parseInt($("#min-rating").val());
+  $("#min-rating-txt").text(" " + min_rating);
+  ShowProductsListFilteredRating();
+});
+
+$("#max-rating").on("change mousemove", function () {
+  max_rating = parseInt($("#max-rating").val());
+  $("#max-rating-txt").text(" " + max_rating);
+  ShowProductsListFilteredRating();
+});
+
+$('.sortByPrice').on('click',function(){
+  MySort();
+});
+     
+function ShowAllProductsList() {
+  //Default grid to show all items on page load in
+  $("#display-items-div").empty();
+  for (let i = 0; i <  products_array.length; i++) {
+    let item_content =
+
+    " <div class=\"mylist\"> \
+                <div class=\"myimage\"> \
+                    <img src=" + products_array[i].link + " > \
+                </div>  \
+                <div class=\"myproduct\"> \
+                    <dl> \
+                        <dt><b>" + products_array[i].name + "</b></dt> \
+                        <br> \ <dd>-   " + products_array[i].name + "</dd> \
+                    <dd>-   " + products_array[i].price + "</dd> \
+                    <dd>-   " + products_array[i].rating + "</dd> \
+                    <dd>-   " + products_array[i].url_link + "</dd> \
+                    </dl> \
+                </div> \
+        </div>";
+      
+    /*  
+      '<div class="col-12 col-md-4 text-center product-card" data-available-sizes="' +
+      category_items[i]["sizes"] +
+      '"><b>' +
+      category_items[i]["title"] +
+      '</b><br><img src="' +
+      category_items[i]["thumbnail"] +
+      '" height="64" width="64" alt="shoe thumbnail"><p>$' +
+      category_items[i]["price"] +
+      "</p></div>";
+
+    */
+    $("#display-items-div").append(item_content);
+  }
+}
+
+function ShowProductsListFiltered() {
+  //Default grid to show all items on page load in
+  $("#display-items-div").empty();
+  for (let i = 0; i < products_array.length; i++) {
+    if (
+     parseInt(products_array[i].price,10) <= max_price &&
+     parseFloat(products_array[i].rating) <= max_rating &&  
+     parseInt(products_array[i].price,10) >= min_price &&
+     parseFloat(products_array[i].rating) >= min_rating
+    )  {
+       let item_content =
+
+    " <div class=\"mylist\"> \
+                <div class=\"myimage\"> \
+                    <img src=" + products_array[i].link + " > \
+                </div>  \
+                <div class=\"myproduct\"> \
+                    <dl> \
+                        <dt><b>" + products_array[i].name + "</b></dt> \
+                        <br> \ <dd>-   " + products_array[i].name + "</dd> \
+                    <dd>-   " + products_array[i].price + "</dd> \
+                    <dd>-   " + products_array[i].rating + "</dd> \
+                    <dd>-   " + products_array[i].url_link + "</dd> \
+                    </dl> \
+                </div> \
+        </div>";
+       $("#display-items-div").append(item_content); //Display in grid
+    }
+  }
+   /*  
+  
+  for (let i = 0; i < category_items.length; i++) {
+    //Go through the items but only show items that have size from show_sizes_array
+    if (
+      category_items[i]["price"] <= max_price &&
+      category_items[i]["price"] >= min_price
+    ) {
+      let item_content =
+
+        
+      
+        '<div class="col-12 col-md-4 text-center product-card" data-available-sizes="' +
+        category_items[i]["sizes"] +
+        '"><b>' +
+        category_items[i]["title"] +
+        '</b><br><img src="' +
+        category_items[i]["thumbnail"] +
+        '" height="64" width="64" alt="shoe thumbnail"><p>$' +
+        category_items[i]["price"] +
+        "</p></div>";
+    
+        
+      $("#display-items-div").append(item_content); //Display in grid
+    }
+  }
+  */
+}
+ 
+function ShowProductsListFilteredRating() {
+  //Default grid to show all items on page load in
+  $("#display-items-div").empty();
+  for (let i = 0; i < products_array.length; i++) {
+    if (
+     parseFloat(products_array[i].rating) <= max_rating &&
+     parseInt(products_array[i].price,10) <= max_price && 
+     parseFloat(products_array[i].rating) >= min_rating &&
+     parseInt(products_array[i].price,10) >= min_price 
+    )  {
+       let item_content =
+
+    " <div class=\"mylist\"> \
+                <div class=\"myimage\"> \
+                    <img src=" + products_array[i].link + " > \
+                </div>  \
+                <div class=\"myproduct\"> \
+                    <dl> \
+                        <dt><b>" + products_array[i].name + "</b></dt> \
+                        <br> \ <dd>-   " + products_array[i].name + "</dd> \
+                    <dd>-   " + products_array[i].price + "</dd> \
+                    <dd>-   " + products_array[i].rating + "</dd> \
+                    <dd>-   " + products_array[i].url_link + "</dd> \
+                    </dl> \
+                </div> \
+        </div>";
+       $("#display-items-div").append(item_content); //Display in grid
+    }
+  }
+     
+
+}
+
+
+   </script>
+
+</body>
+
+</html>

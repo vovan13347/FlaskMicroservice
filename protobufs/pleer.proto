@@ -1,0 +1,79 @@
+syntax = "proto3";
+
+
+
+message ProductInfoRequest {
+	int32 user_id = 1;
+	int32 detail = 2;
+    int32 max_results = 3;
+}
+
+message ProductShow {
+	int32 id = 1;
+    repeated string product_name = 2;
+    repeated string price = 3;
+    repeated string rating = 4;
+    repeated string image_link = 5;
+    repeated string shop_link = 6;
+}
+
+message ProductInfoResponse {
+    repeated ProductShow products = 1;
+}
+
+
+service Products {
+    rpc ShowProducts(ProductInfoRequest) returns (ProductInfoResponse);
+    
+}
+
+
+service Search {
+  // Sends a greeting
+  rpc SearchProduct (SearchRequest) returns (SearchResponse) {}
+  
+  
+}
+
+// The request message containing the user's name.
+message SearchRequest {
+  string enter = 1;
+}
+
+// The response message containing the greetings
+message SearchResponse {
+  string message = 1;
+}
+
+
+/*
+
+enum BookCategory {
+    MYSTERY = 0;
+    SCIENCE_FICTION = 1;
+    SELF_HELP = 2;
+}
+
+
+message RecommendationRequest {
+    int32 user_id = 1;
+    BookCategory category = 2;
+    int32 max_results = 3;
+}
+
+
+message BookRecommendation {
+    int32 id = 1;
+    string title = 2;
+}
+
+
+message RecommendationResponse {
+    repeated BookRecommendation recommendations = 1;
+}
+
+
+service Recommendations {
+    rpc Recommend (RecommendationRequest) returns (RecommendationResponse);
+}
+*/
