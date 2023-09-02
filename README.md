@@ -17,6 +17,8 @@ beautifulsoup4>=4.11.1
 1. Установить виртуальное окружение командой `virtualenv имя окружения`
 2. Запустить виртуальное окружение командой`source имя окружения/bin/activate`
 3. Установить библеотеки `python -m pip install -r requirements.txt`
-4. Сгенерировать код Python из фа йлов proto `python -m grpc_tools.protoc -I ../protobufs --python_out=. --grpc_python_out=. ../protobufs/имя_файла.proto` в каждую папку
+4. Сгенерировать код Python из файлов proto `python -m grpc_tools.protoc -I ../protobufs --python_out=. --grpc_python_out=. ../protobufs/имя_файла.proto` в каждую папку
 5. (запуск в отдельной командной строке)Запустить виртуальное окружение командой`source имя окружения/bin/activate`
-6. Запустить файл скрепинга командой `python имяфайла_scraper.py`
+6. (запуск в отдельной командной строке)Запустить файл скрепинга командой `python имяфайла_scraper.py`
+7. (запуск в отдельной командной строке) Повторить пункт 5
+8. (запуск в отдельной командной строке)Запустить файл сервера командой `python server.py`
