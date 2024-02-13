@@ -8,10 +8,11 @@ flask~=1.1
 grpcio-tools~=1.30
 Jinja2~=2.11
 pytest~=5.4
-MarkupSafe==2.0.1
-flask-wtf>=1.0.1
-requests>=2.28.1
-beautifulsoup4>=4.11.1
+MarkupSafe~=2.0.1
+flask-wtf~=1.0.1
+requests~=2.28.1
+beautifulsoup4~=4.11.1
+
 ```
 # Как запустить
 1. Установить виртуальное окружение командой `virtualenv имя окружения`
